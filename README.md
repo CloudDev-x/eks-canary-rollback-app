@@ -4,6 +4,10 @@ A GitOps canary delivery pipeline on Amazon EKS with automated rollback driven b
 
 ## Architecture
 
+![EKS Canary Rollback Architecture](docs/eks-canary-architecture.png)
+
+## Architecture
+
 GitHub Actions CI
 push to main → build images → push to ECR → update gitops repo
 │
