@@ -25,7 +25,7 @@ data "aws_iam_policy_document" "ci_assume" {
     condition {
       test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:${var.github_owner}/${var.github_app_repo}:ref:refs/heads/main"]
+      values   = ["repo:${var.github_owner}@183810638/${var.github_app_repo}@1438337630:ref:refs/heads/main"]
     }
   }
 }
