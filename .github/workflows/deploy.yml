@@ -74,11 +74,13 @@ jobs:
           repository: ${{ github.repository_owner }}/eks-canary-rollback-gitops
           token: ${{ steps.app-token.outputs.token }}
 
-      - name: Bump image tags
+      - name: Bump image tags and APP_VERSION
         run: |
           sed -i "s|eks-canary-rollback/api:[^ ]*|eks-canary-rollback/api:${IMAGE_TAG}|g" apps/api/deployment.yaml
           sed -i "s|eks-canary-rollback/frontend:[^ ]*|eks-canary-rollback/frontend:${IMAGE_TAG}|g" apps/frontend/deployment.yaml
           sed -i "s|eks-canary-rollback/worker:[^ ]*|eks-canary-rollback/worker:${IMAGE_TAG}|g" apps/worker/deployment.yaml
+          sed -i "/name: APP_VERSION/{n;s|value: .*|value: \"${IMAGE_TAG}\"|}" apps/api/deployment.yaml
+          sed -i "/name: APP_VERSION/{n;s|value: .*|value: \"${IMAGE_TAG}\"|}" apps/worker/deployment.yaml
 
       - name: Commit and push
         run: |
